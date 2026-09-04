@@ -22,11 +22,19 @@ class AuthenticatedSessionController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+
+            if (Auth::user()->role !== 'admin') {
+                Auth::logout();
+                return back()->withErrors([
+                    'username' => 'Akun ini bukan admin.',
+                ]);
+            }
+
             return redirect()->route('admin.dashboard');
         }
 
         return back()->withErrors([
-            'username' => 'ID petugas atau kata sandi salah.',
+            'username' => 'Username atau password salah.',
         ]);
     }
 

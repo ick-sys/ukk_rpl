@@ -54,7 +54,7 @@
             <p class="text-gold-400 text-xs mt-1">kelola gerbang &amp; slot parkir</p>
         </div>
 
-        <form method="POST" action="{{ url('/dashboard') }}" class="space-y-4">
+        <form method="POST" action="{{ route('login.store') }}" class="space-y-4">
             @csrf
             
             <div>
